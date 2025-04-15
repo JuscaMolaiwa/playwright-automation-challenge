@@ -3,6 +3,8 @@ const fs = require('fs');
 const { TestLogger } = require('../../shared-utils/testLogger.js');
 const { BrowserOptions } = require('../web_utilities/BrowserOptions.js');
 const playwrightConfig = require('../playwright.config.js');
+import { LoginPage } from '../pages/login.page.js';
+import { InventoryPage } from '../pages/InventoryPage';
 class WebBaseTest {
 
 
@@ -30,7 +32,7 @@ class WebBaseTest {
     static async setUp() {
         await this.initializingBrowser();
         await this.initializePageObjects();
-        
+
     }
 
     static async tearDown() {
@@ -44,7 +46,6 @@ class WebBaseTest {
     static async initializingBrowser() {
         try {
             // Initialize browser
-            console.log("initializing browser")
             this.browser = await BrowserOptions.initializeBrowser();
             this.context = await this.browser.newContext();
             this.page = await this.context.newPage();

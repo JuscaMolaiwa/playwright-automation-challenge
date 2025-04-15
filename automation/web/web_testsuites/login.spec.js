@@ -2,6 +2,7 @@
 const { test, expect } = require('@playwright/test');
 const users = require('../../test-data/userDataProvider.js');
 const { WebBaseTest } = require('../web_utilities/webBaseTest');
+const {loginPage} = require('../pages/login.page.js')
 
 test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
     test.beforeAll(async () => {
@@ -26,13 +27,12 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
     users.forEach(user => {
         test(`Validate ${user.username} (${user.expectedResult})`, async () => {
-            const { loginPage, inventoryPage } = WebBaseTest;
-            
+
             // Execute login with the robust LoginPage method
             await loginPage.login(user.username, user.password);
 
             // Special handling for each user type
-            switch(user.expectedResult) {
+            switch (user.expectedResult) {
                 case 'success':
                     await expect(inventoryPage.pageTitle).toBeVisible();
                     break;

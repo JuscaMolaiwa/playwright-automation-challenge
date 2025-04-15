@@ -20,7 +20,7 @@ class WebHelperMethods {
             }
         }
 
-        return environment || 'LOCAL_ENVIRONMENT'; // Default to LOCAL_ENVIRONMENT
+        return environment || 'local'; 
     }
 }
 
