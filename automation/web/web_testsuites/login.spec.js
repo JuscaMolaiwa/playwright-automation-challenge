@@ -51,12 +51,25 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
                 case 'success_with_issues':
                     await expect(inventoryPage.pageTitle).toBeVisible();
-                    // Additional problem user validations
-                    await expect(loginPage.page.locator('.inventory_item_img')).not.toHaveCount(0);
+                    loginPage.verifySuccessWithIssuesInventory();
                     break;
 
                 case 'slow_success':
-                    await expect(inventoryPage.pageTitle).toBeVisible({ timeout: 20000 });
+                    const start = Date.now();
+                    // Wait for important inventory elements to be visible
+                    await expect(loginPage.secondaryHeader).toBeVisible();
+                    await expect(loginPage.inventoryList).toBeVisible();
+
+                    const end = Date.now();
+                    const loadTime = end - start;
+                    console.log(`Performance glitch user inventory loaded in ${loadTime}ms`);
+                    loginPage.verifySuccessfulLogin();
+                    expect(end - start).toBeGreaterThan(3);
+                    if (loadTime < 1) {
+                        console.warn('Expected slower load, but it was fast — glitch not observed clearly.');
+                    } else {
+                        console.log('Performance glitch delay observed as expected.');
+                    }
                     break;
 
                 case 'unexpected_errors':
@@ -69,7 +82,7 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
                 case 'ui_issues':
                     await expect(inventoryPage.pageTitle).toBeVisible();
-                    // Visual testing integration would go here
+                    await loginPage.verifyUiIssuesInventory();
                     break;
             }
         });
@@ -77,7 +90,6 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
     // Boundary tests
     test('Invalid credentials show appropriate error', async () => {
-        const { loginPage } = WebBaseTest;
         await loginPage.login('invalid', 'credentials');
         await expect(loginPage.errorMessage).toHaveText(
             'Epic sadface: Username and password do not match any user in this service'
@@ -85,7 +97,6 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
     });
 
     test('Empty credentials show validation errors', async () => {
-        const { loginPage } = WebBaseTest;
         await loginPage.login('', '');
         await expect(loginPage.errorMessage).toHaveText(
             'Epic sadface: Username is required'
