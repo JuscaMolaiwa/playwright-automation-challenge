@@ -1,6 +1,16 @@
 # Web Automation Testing
 
-This repository contains web automation test scripts for testing web applications using Playwright (or Selenium, Cypress, etc.). The goal of this project is to ensure the functionality, performance, and stability of the web application through automated testing.
+![Playwright Logo](https://playwright.dev/img/playwright-logo.svg)
+
+A robust automation testing framework built with Playwright for end-to-end testing of web applications.
+
+## Features
+
+- Cross-browser testing (Chromium, Firefox, WebKit)
+- Comprehensive reporting (HTML, JSON, JUnit)
+- Visual regression testing
+- Parallel test execution
+- Modular test architecture
 
 ## Table of Contents
 
@@ -26,7 +36,7 @@ Before you begin, ensure that you have met the following requirements:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/web-automation.git
+   git clone https://github.com/yourusername/playwright-automation-challenge.git
 
 2. Install dependencies:
 
@@ -64,13 +74,6 @@ Once the tests are executed, Playwright will generate a test report (default in 
 ```bash
 npx playwright show-report
 ```
-
-
-## Types of Tests
-
-- Functional Tests: Focus on testing specific features of the application, such as login or checkout.
-- UI/Visual Tests: Use visual comparison tools to ensure the UI matches the expected design.
-- Cross-browser Compatibility: Test across different browsers to ensure compatibility (e.g., Chrome, Firefox, WebKit).
 
 ## Test Data
 
