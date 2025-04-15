@@ -1,0 +1,109 @@
+{
+  "_initializer": {
+    "fetchUid": "c09c8622b154b797b3f07677a14ae554",
+    "url": "https://restful-booker.herokuapp.com/booking",
+    "status": 500,
+    "statusText": "Internal Server Error",
+    "headers": [
+      {
+        "name": "Server",
+        "value": "Cowboy"
+      },
+      {
+        "name": "Report-To",
+        "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1744753311&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y7VCNxHFmI6s5tx60PB6mbCaMJYZ%2FtYFqQRtUuDH%2F0w%3D\"}]}"
+      },
+      {
+        "name": "Reporting-Endpoints",
+        "value": "heroku-nel=https://nel.heroku.com/reports?ts=1744753311&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y7VCNxHFmI6s5tx60PB6mbCaMJYZ%2FtYFqQRtUuDH%2F0w%3D"
+      },
+      {
+        "name": "Nel",
+        "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+      },
+      {
+        "name": "Connection",
+        "value": "keep-alive"
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "Express"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "Content-Length",
+        "value": "21"
+      },
+      {
+        "name": "Etag",
+        "value": "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\""
+      },
+      {
+        "name": "Date",
+        "value": "Tue, 15 Apr 2025 21:41:51 GMT"
+      },
+      {
+        "name": "Via",
+        "value": "1.1 vegur"
+      }
+    ]
+  },
+  "_headers": {
+    "_headersArray": [
+      {
+        "name": "Server",
+        "value": "Cowboy"
+      },
+      {
+        "name": "Report-To",
+        "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1744753311&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y7VCNxHFmI6s5tx60PB6mbCaMJYZ%2FtYFqQRtUuDH%2F0w%3D\"}]}"
+      },
+      {
+        "name": "Reporting-Endpoints",
+        "value": "heroku-nel=https://nel.heroku.com/reports?ts=1744753311&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y7VCNxHFmI6s5tx60PB6mbCaMJYZ%2FtYFqQRtUuDH%2F0w%3D"
+      },
+      {
+        "name": "Nel",
+        "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+      },
+      {
+        "name": "Connection",
+        "value": "keep-alive"
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "Express"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/plain; charset=utf-8"
+      },
+      {
+        "name": "Content-Length",
+        "value": "21"
+      },
+      {
+        "name": "Etag",
+        "value": "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\""
+      },
+      {
+        "name": "Date",
+        "value": "Tue, 15 Apr 2025 21:41:51 GMT"
+      },
+      {
+        "name": "Via",
+        "value": "1.1 vegur"
+      }
+    ],
+    "_headersMap": {
+      "_map": {}
+    }
+  },
+  "_request": {
+    "_type": "APIRequestContext",
+    "_guid": "request-context@8a3927d8a5d517d30e2f9c408afbf3f4"
+  }
+}

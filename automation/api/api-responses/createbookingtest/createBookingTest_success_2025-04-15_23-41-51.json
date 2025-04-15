@@ -1,0 +1,14 @@
+{
+  "bookingid": 1455,
+  "booking": {
+    "firstname": "Lucious",
+    "lastname": "Bogan",
+    "totalprice": 72,
+    "depositpaid": false,
+    "bookingdates": {
+      "checkin": "2025-05-22",
+      "checkout": "2025-05-13"
+    },
+    "additionalneeds": "Breakfast"
+  }
+}
