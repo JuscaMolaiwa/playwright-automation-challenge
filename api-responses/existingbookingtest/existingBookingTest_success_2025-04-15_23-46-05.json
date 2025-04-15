@@ -1,0 +1,11 @@
+{
+  "firstname": "Jennings",
+  "lastname": "Emmerich",
+  "totalprice": 806,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-04-26",
+    "checkout": "2025-06-21"
+  },
+  "additionalneeds": "WiFi"
+}

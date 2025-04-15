@@ -39,11 +39,13 @@ npm install date-fns --save-dev
 - Specific Test Suite:
 
 ```bash
-npx playwright test automation/api/api_testsuites/createBooking.test.js --reporter=html 
+cd automation/api
+npx playwright test createBooking.test.js --reporter=html 
 ```
 
 - To run all tests, execute the following command:
 ```bash
+cd automation/api
 npx playwright test --reporter=html
 ```
 

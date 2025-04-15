@@ -1,0 +1,11 @@
+{
+  "firstname": "Russ",
+  "lastname": "Grant",
+  "totalprice": 559,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-04-26",
+    "checkout": "2025-05-18"
+  },
+  "additionalneeds": "Breakfast"
+}
