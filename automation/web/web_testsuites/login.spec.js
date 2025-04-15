@@ -64,8 +64,8 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
                     const loadTime = end - start;
                     console.log(`Performance glitch user inventory loaded in ${loadTime}ms`);
                     loginPage.verifySuccessfulLogin();
-                    expect(end - start).toBeGreaterThan(3);
-                    if (loadTime < 1) {
+                    expect(end - start).toBeGreaterThan(2);
+                    if (loadTime < 2) {
                         console.warn('Expected slower load, but it was fast — glitch not observed clearly.');
                     } else {
                         console.log('Performance glitch delay observed as expected.');

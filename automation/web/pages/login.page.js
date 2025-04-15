@@ -48,7 +48,7 @@ class LoginPage {
 
   async verifyUiIssuesInventory() {
     await expect(
-      this.uiIssuesInventory
+      this.inventoryList
     ).toMatchAriaSnapshot(`
       - link "Test.allTheThings() T-Shirt (Red)"
       - text: /This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests\\. Super-soft and comfy ringspun combed cotton\\. \\$\\d+\\.\\d+/
