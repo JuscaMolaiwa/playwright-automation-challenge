@@ -1,0 +1,14 @@
+{
+  "bookingid": 5003,
+  "booking": {
+    "firstname": "Frida",
+    "lastname": "Moen",
+    "totalprice": 949,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2025-05-14",
+      "checkout": "2025-04-30"
+    },
+    "additionalneeds": "WiFi"
+  }
+}

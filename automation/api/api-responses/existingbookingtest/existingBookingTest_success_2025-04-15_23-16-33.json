@@ -1,0 +1,11 @@
+{
+  "firstname": "Tierra",
+  "lastname": "Herzog",
+  "totalprice": 119,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-05-18",
+    "checkout": "2025-06-26"
+  },
+  "additionalneeds": "Parking"
+}

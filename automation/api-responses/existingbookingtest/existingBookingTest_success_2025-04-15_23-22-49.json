@@ -1,0 +1,11 @@
+{
+  "firstname": "Lorine",
+  "lastname": "Medhurst-Bruen",
+  "totalprice": 748,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-05-04",
+    "checkout": "2025-05-12"
+  },
+  "additionalneeds": "Airport Shuttle"
+}

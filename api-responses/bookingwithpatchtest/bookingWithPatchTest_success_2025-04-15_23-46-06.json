@@ -1,0 +1,11 @@
+{
+  "firstname": "UpdatedName",
+  "lastname": "Hansen",
+  "totalprice": 999,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-05-15",
+    "checkout": "2025-05-11"
+  },
+  "additionalneeds": "WiFi"
+}
