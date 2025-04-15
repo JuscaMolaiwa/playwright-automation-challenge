@@ -2,15 +2,20 @@
 const { test, expect } = require('@playwright/test');
 const users = require('../../test-data/userDataProvider.js');
 const { WebBaseTest } = require('../web_utilities/webBaseTest');
-const {loginPage} = require('../pages/login.page.js')
+const { LoginPage } = require('../pages/login.page.js')
+const { InventoryPage } = require('../pages/inventoryPage');
 
 test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
+    let loginPage, inventoryPage;
+
     test.beforeAll(async () => {
         await WebBaseTest.setupClass();
     });
 
     test.beforeEach(async () => {
         await WebBaseTest.setUp();
+        loginPage = new LoginPage(WebBaseTest.page);
+        inventoryPage = new InventoryPage(WebBaseTest.page);
     });
 
     test.afterEach(async () => {
@@ -35,6 +40,7 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
             switch (user.expectedResult) {
                 case 'success':
                     await expect(inventoryPage.pageTitle).toBeVisible();
+                    loginPage.verifySuccessfulLogin();
                     break;
 
                 case 'locked':

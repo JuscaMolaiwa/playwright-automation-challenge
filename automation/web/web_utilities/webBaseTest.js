@@ -3,8 +3,6 @@ const fs = require('fs');
 const { TestLogger } = require('../../shared-utils/testLogger.js');
 const { BrowserOptions } = require('../web_utilities/BrowserOptions.js');
 const playwrightConfig = require('../playwright.config.js');
-import { LoginPage } from '../pages/login.page.js';
-import { InventoryPage } from '../pages/InventoryPage';
 class WebBaseTest {
 
 
@@ -14,11 +12,8 @@ class WebBaseTest {
     static context;
     static page;
 
-    // Page objects
-    static loginPage;
-    static inventoryPage
+    // Configuration
     static URL = playwrightConfig.use.baseURL;
-
 
     static async setupClass() {
         try {
@@ -31,8 +26,6 @@ class WebBaseTest {
 
     static async setUp() {
         await this.initializingBrowser();
-        await this.initializePageObjects();
-
     }
 
     static async tearDown() {
@@ -47,20 +40,16 @@ class WebBaseTest {
         try {
             // Initialize browser
             this.browser = await BrowserOptions.initializeBrowser();
-            this.context = await this.browser.newContext();
+            this.context = await this.browser.newContext({
+                ignoreHTTPSErrors: true,
+                proxy: undefined // Explicitly no proxy
+            });
             this.page = await this.context.newPage();
-            await this.page.goto(this.URL, { waitUntil: 'networkidle' });
+            await this.page.goto(this.URL, { waitUntil: 'domcontentloaded' });
         } catch (e) {
             await TestLogger.logTestResult('SEVERE', `Browser initialization error: ${e.message}`);
             throw new Error(`Failed to initialize browser: ${e.message}`);
         }
-    }
-
-    static async initializePageObjects() {
-        this.loginPage = new LoginPage(this.page);
-        this.inventoryPage = new InventoryPage(this.page);
-        await TestLogger.logTestResult(
-            'INFO', `successfully: initialized page objects`);
     }
 
     static async closeContext() {
@@ -69,7 +58,7 @@ class WebBaseTest {
                 await this.context.close();
             }
         } catch (e) {
-            await TestLogger.logTestResult('SEVERE', `Failed to close browser context: ${e.message}`);
+            await TestLogger.logTestResult('SEVERE', `Failed to close browser context: ${e.message}`, e);
         }
     }
 
@@ -82,7 +71,7 @@ class WebBaseTest {
                 await this.playwright.close();
             }
         } catch (e) {
-            await TestLogger.logTestResult('SEVERE', `Failed to close browser: ${e.message}`);
+            await TestLogger.logTestResult('SEVERE', `Failed to close browser: ${e.message}`, e);
         }
     }
 
@@ -97,7 +86,7 @@ class WebBaseTest {
             });
             await TestLogger.logTestResult('INFO', `Screenshot captured successfully: ${screenshotFile.path}`);
         } catch (e) {
-            await TestLogger.logTestResult('SEVERE', `Failed to capture screenshot: ${e.message}`);
+            await TestLogger.logTestResult('SEVERE', `Failed to capture screenshot: ${e.message}`, e);
         }
     }
 
