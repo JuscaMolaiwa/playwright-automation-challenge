@@ -2,14 +2,20 @@
 const { test, expect } = require('@playwright/test');
 const users = require('../../test-data/userDataProvider.js');
 const { WebBaseTest } = require('../web_utilities/webBaseTest');
+const { LoginPage } = require('../pages/login.page.js')
+const { InventoryPage } = require('../pages/inventoryPage');
 
 test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
+    let loginPage, inventoryPage;
+
     test.beforeAll(async () => {
         await WebBaseTest.setupClass();
     });
 
     test.beforeEach(async () => {
         await WebBaseTest.setUp();
+        loginPage = new LoginPage(WebBaseTest.page);
+        inventoryPage = new InventoryPage(WebBaseTest.page);
     });
 
     test.afterEach(async () => {
@@ -26,15 +32,15 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
     users.forEach(user => {
         test(`Validate ${user.username} (${user.expectedResult})`, async () => {
-            const { loginPage, inventoryPage } = WebBaseTest;
-            
+
             // Execute login with the robust LoginPage method
             await loginPage.login(user.username, user.password);
 
             // Special handling for each user type
-            switch(user.expectedResult) {
+            switch (user.expectedResult) {
                 case 'success':
                     await expect(inventoryPage.pageTitle).toBeVisible();
+                    loginPage.verifySuccessfulLogin();
                     break;
 
                 case 'locked':
@@ -45,12 +51,25 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
                 case 'success_with_issues':
                     await expect(inventoryPage.pageTitle).toBeVisible();
-                    // Additional problem user validations
-                    await expect(loginPage.page.locator('.inventory_item_img')).not.toHaveCount(0);
+                    loginPage.verifySuccessWithIssuesInventory();
                     break;
 
                 case 'slow_success':
-                    await expect(inventoryPage.pageTitle).toBeVisible({ timeout: 20000 });
+                    const start = Date.now();
+                    // Wait for important inventory elements to be visible
+                    await expect(loginPage.secondaryHeader).toBeVisible();
+                    await expect(loginPage.inventoryList).toBeVisible();
+
+                    const end = Date.now();
+                    const loadTime = end - start;
+                    console.log(`Performance glitch user inventory loaded in ${loadTime}ms`);
+                    loginPage.verifySuccessfulLogin();
+                    expect(end - start).toBeGreaterThan(2);
+                    if (loadTime < 2) {
+                        console.warn('Expected slower load, but it was fast — glitch not observed clearly.');
+                    } else {
+                        console.log('Performance glitch delay observed as expected.');
+                    }
                     break;
 
                 case 'unexpected_errors':
@@ -63,7 +82,7 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
                 case 'ui_issues':
                     await expect(inventoryPage.pageTitle).toBeVisible();
-                    // Visual testing integration would go here
+                    await loginPage.verifyUiIssuesInventory();
                     break;
             }
         });
@@ -71,7 +90,6 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
 
     // Boundary tests
     test('Invalid credentials show appropriate error', async () => {
-        const { loginPage } = WebBaseTest;
         await loginPage.login('invalid', 'credentials');
         await expect(loginPage.errorMessage).toHaveText(
             'Epic sadface: Username and password do not match any user in this service'
@@ -79,7 +97,6 @@ test.describe('SauceDemo Login Tests - Comprehensive User Validation', () => {
     });
 
     test('Empty credentials show validation errors', async () => {
-        const { loginPage } = WebBaseTest;
         await loginPage.login('', '');
         await expect(loginPage.errorMessage).toHaveText(
             'Epic sadface: Username is required'

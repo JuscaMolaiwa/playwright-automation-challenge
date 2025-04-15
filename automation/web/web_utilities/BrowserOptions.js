@@ -20,13 +20,13 @@ class BrowserOptions {
     static getBrowserChoice() {
         // Try environment variable first
         let browser = playwrightConfig.use.browserName;
-        
+
         // Validate browser choice
         if (browser && Object.values(this.BROWSERS).includes(browser)) {
             return browser;
         }
-        
-        TestLogger.logTestResult('WARNING', 
+
+        TestLogger.logTestResult('WARNING',
             `Invalid browser choice: ${browser}. Defaulting to ${this.DEFAULT_BROWSER}`);
         return this.DEFAULT_BROWSER;
     }
@@ -39,17 +39,17 @@ class BrowserOptions {
         try {
             const browserChoice = this.getBrowserChoice();
             const environment = WebHelperMethods.getEnvironment();
-            
+
             const browserType = this.getBrowserType(browserChoice);
             const launchOptions = this.getLaunchOptions(browserChoice, environment);
 
             const browser = await browserType.launch(launchOptions);
             await TestLogger.logTestResult(
                 'INFO',
-                `Browser launched successfully: ${browserChoice} v${browser.version()}`
+                `Browser initialized and launched successfully: ${browserChoice} v${browser.version()}`
             );
             return browser;
-            
+
         } catch (e) {
             await TestLogger.logTestResult('SEVERE', `Browser init failed: ${e.stack}`);
             throw new Error(`Browser initialization failed: ${e.message}`);
@@ -71,12 +71,12 @@ class BrowserOptions {
             headless: this.shouldRunHeadless(environment),
             args: this.getBrowserArgs(browserChoice, environment)
         };
-        
+
         // Chrome/Edge specific options
         if ([this.BROWSERS.CHROME, this.BROWSERS.EDGE].includes(browserChoice)) {
             options.channel = browserChoice === this.BROWSERS.EDGE ? 'msedge' : 'chrome';
         }
-        
+
         return options;
     }
 
