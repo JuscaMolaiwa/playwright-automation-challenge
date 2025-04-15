@@ -1,19 +1,27 @@
-// --- utils/testData.js ---
+const { faker } = require('@faker-js/faker');  
+
 module.exports = {
-    validBooking: {
-      firstname: 'Jim',
-      lastname: 'Brown',
-      totalprice: 111,
-      depositpaid: true,
-      bookingdates: {
-        checkin: '2023-01-01',
-        checkout: '2023-01-10'
-      },
-      additionalneeds: 'Breakfast'
+  generateBookingData: () => ({
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    totalprice: faker.datatype.number({ min: 50, max: 1000 }),
+    depositpaid: faker.datatype.boolean(),
+    bookingdates: {
+      checkin: faker.date.future({ years: 0.1 }).toISOString().split('T')[0],
+      checkout: faker.date.future({ years: 0.2 }).toISOString().split('T')[0]
     },
-  
-    credentials: {
-      username: 'admin',
-      password: 'password123'
-    }
-  };
+    additionalneeds: faker.helpers.arrayElement(['Breakfast', 'WiFi', 'Parking', 'Airport Shuttle'])
+  }),
+
+  defaultBookingPayload: {
+    firstname: "John",
+    lastname: "Doe",
+    totalprice: 123,
+    depositpaid: true,
+    bookingdates: {
+      checkin: "2023-01-01",
+      checkout: "2023-01-05"
+    },
+    additionalneeds: "Breakfast"
+  }
+};
