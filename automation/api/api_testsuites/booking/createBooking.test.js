@@ -17,11 +17,14 @@ test.describe('Create Booking Tests', () => {
     const response = await apiHelper.createBooking(bookingData);
     
     expect(response.booking).toMatchObject(bookingData);
+
+    apiHelper.storeJsonElement(response, 'createBookingTest', "success");
     expect(typeof response.bookingid).toBe('number');
   });
 
   test('should create a booking with static payload', async () => {
     const response = await apiHelper.createBooking(defaultBookingPayload);
+    apiHelper.storeJsonElement(response, 'createBookingStaticDataTest', "success");
     expect(response.booking).toMatchObject(defaultBookingPayload);
   });
 
@@ -30,6 +33,8 @@ test.describe('Create Booking Tests', () => {
     const response = await apiHelper.request.post(`${baseURL}/booking`, {
       data: invalidData
     });
+
+    apiHelper.storeJsonElement(response, 'createBookingInvalidTest', "success");
     expect(response.ok()).toBeFalsy();
   });
 });

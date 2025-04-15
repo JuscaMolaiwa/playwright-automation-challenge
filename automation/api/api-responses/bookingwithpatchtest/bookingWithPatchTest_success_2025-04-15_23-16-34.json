@@ -1,0 +1,11 @@
+{
+  "firstname": "UpdatedName",
+  "lastname": "Langworth",
+  "totalprice": 999,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-05-02",
+    "checkout": "2025-05-19"
+  },
+  "additionalneeds": "WiFi"
+}

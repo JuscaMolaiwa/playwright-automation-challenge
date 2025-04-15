@@ -1,0 +1,11 @@
+{
+  "firstname": "Albina",
+  "lastname": "Schuster",
+  "totalprice": 217,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-05-14",
+    "checkout": "2025-05-15"
+  },
+  "additionalneeds": "Parking"
+}

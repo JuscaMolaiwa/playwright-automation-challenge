@@ -1,0 +1,14 @@
+{
+  "bookingid": 2592,
+  "booking": {
+    "firstname": "Marjolaine",
+    "lastname": "McGlynn",
+    "totalprice": 385,
+    "depositpaid": false,
+    "bookingdates": {
+      "checkin": "2025-05-10",
+      "checkout": "2025-04-19"
+    },
+    "additionalneeds": "Airport Shuttle"
+  }
+}

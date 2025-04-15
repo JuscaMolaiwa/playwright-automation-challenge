@@ -1,5 +1,7 @@
 const { expect } = require('@playwright/test');
-const { faker } = require('@faker-js/faker'); 
+const fs = require('fs');
+      const path = require('path');
+      const { format } = require('date-fns');
 
 class APIHelper {
   /**
@@ -39,7 +41,7 @@ class APIHelper {
       'Cookie': `token=${token}`
     };
     
-    const response = await this.request[method](`/booking/${bookingId}`, {
+    const response = await this.request[method](`${this.baseURL}/booking/${bookingId}`, {
       data,
       headers
     });
@@ -55,6 +57,55 @@ class APIHelper {
       }
     });
     expect(response.status()).toBe(201);
+  }
+
+  /**
+   * Stores the last API response to a JSON file
+   * @param {string} testName - Name of the test for directory organization
+   * @returns {string} Path to the saved file
+   */
+  async storeLastResponse(testName) {
+    if (!this.lastResponse) {
+      throw new Error('No response available to store');
+    }
+    
+    const responseBody = await this.lastResponse.json();
+    return this.storeJsonElement(responseBody, testName);
+  }
+
+  /**
+   * Stores any JSON data to file
+   * @param {Object} jsonData - The JSON data to store
+   * @param {string} testName - Test name for directory
+   * @param {string} scenario - Scenario identifier
+   * @returns {string} Path to saved file
+   */
+  storeJsonElement(jsonData, testName, scenario) {
+    try {
+    
+      const jsonDirectory = path.join(
+        process.cwd(), 
+        'api-responses', 
+        testName.toLowerCase()
+      );
+      
+      if (!fs.existsSync(jsonDirectory)) {
+        fs.mkdirSync(jsonDirectory, { recursive: true });
+      }
+
+      const timestamp = format(new Date(), 'yyyy-MM-dd_HH-mm-ss');
+      const fileName = `${testName}_${scenario}_${timestamp}.json`;
+      const filePath = path.join(jsonDirectory, fileName);
+
+      const prettyJson = JSON.stringify(jsonData, null, 2);
+      fs.writeFileSync(filePath, prettyJson);
+
+      console.log(`\x1b[33mJSON data stored: ${filePath}\x1b[0m`);
+      return filePath;
+    } catch (error) {
+      console.error('\x1b[31mFailed to store JSON:', error.message, '\x1b[0m');
+      throw error;
+    }
   }
 }
 

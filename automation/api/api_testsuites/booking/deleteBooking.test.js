@@ -29,11 +29,16 @@ test.describe('Delete Booking Tests', () => {
     
     // Verify booking is deleted
     const response = await apiHelper.getBooking(bookingId);
+
+    apiHelper.storeJsonElement(response, 'deleteExistingBookingTest', "success");
+    
     expect(response.status()).toBe(404);
   });
 
   test('should fail to delete without auth token', async () => {
     const response = await apiHelper.request.delete(`${baseURL}/booking/${bookingId}`);
+
+    apiHelper.storeJsonElement(response, 'deleteBookingWithoutAuthTest', "success");
     expect(response.status()).toBe(403);
   });
 });
