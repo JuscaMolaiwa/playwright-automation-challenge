@@ -31,7 +31,7 @@ class APIHelper {
   }
 
   async getBooking(bookingId) {
-    return await this.request.get(`/booking/${bookingId}`);
+    return await this.request.get(`${this.baseURL}/booking/${bookingId}`);
   }
 
   async updateBooking(bookingId, data, token, method = 'put') {
@@ -49,7 +49,7 @@ class APIHelper {
   }
 
   async deleteBooking(bookingId, token) {
-    const response = await this.request.delete(`/booking/${bookingId}`, {
+    const response = await this.request.delete(`${this.baseURL}/booking/${bookingId}`, {
       headers: {
         'Cookie': `token=${token}`
       }

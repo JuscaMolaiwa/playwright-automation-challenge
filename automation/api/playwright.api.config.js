@@ -17,6 +17,10 @@ module.exports = defineConfig({
     },
     trace: 'on-first-retry',
   },
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: 'api-test-results' }]
+  ],
   projects: [
     {
       name: 'api',
