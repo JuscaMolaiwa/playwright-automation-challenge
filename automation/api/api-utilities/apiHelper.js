@@ -2,12 +2,17 @@ const { expect } = require('@playwright/test');
 const { faker } = require('@faker-js/faker'); 
 
 class APIHelper {
-  constructor(request) {
+  /**
+   * @param {import('@playwright/test').APIRequestContext} request
+   * @param {string} baseURL
+   */
+  constructor(request, baseURL) {
     this.request = request;
+    this.baseURL = baseURL.endsWith('/') ? baseURL.slice(0, -1) : baseURL;
   }
 
   async generateAuthToken() {
-    const response = await this.request.post('/auth', {
+    const response = await this.request.post(`${this.baseURL}/auth`, {
       data: {
         username: 'admin',
         password: 'password123'

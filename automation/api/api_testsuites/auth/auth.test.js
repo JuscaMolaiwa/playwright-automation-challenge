@@ -1,11 +1,14 @@
 const { test, expect } = require('@playwright/test');
-const APIHelper = require('../../api-utilities/apiHelper.js');
+const APIHelper = require('../../api-utilities/apiHelper');
+const playwrightConfig = require('../../playwright.api.config');
 
 test.describe('Authentication Tests', () => {
   let apiHelper;
+  let baseURL;
 
   test.beforeEach(async ({ request }) => {
-    apiHelper = new APIHelper(request);
+    baseURL = playwrightConfig.use.baseURL;
+    apiHelper = new APIHelper(request, baseURL);
   });
 
   test('should generate a valid auth token', async () => {
@@ -14,14 +17,17 @@ test.describe('Authentication Tests', () => {
     expect(typeof tokenData.token).toBe('string');
   });
 
-  test('should fail with invalid credentials', async ({ request }) => {
-    const response = await request.post('/auth', {
+  test('should fail with invalid credentials', async () => {
+    const response = await apiHelper.request.post(`${baseURL}/auth`, {
       data: {
         username: 'invalid',
         password: 'invalid'
       }
     });
-    expect(response.ok()).toBeFalsy();
+    
+    // This API returns 200 even for invalid credentials
+    expect(response.status()).toBe(200);
+    
     const responseBody = await response.json();
     expect(responseBody.reason).toBe('Bad credentials');
   });
