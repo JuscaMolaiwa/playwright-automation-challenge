@@ -1,0 +1,11 @@
+{
+  "firstname": "Marcia",
+  "lastname": "Herman",
+  "totalprice": 76,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-05-19",
+    "checkout": "2025-05-05"
+  },
+  "additionalneeds": "WiFi"
+}

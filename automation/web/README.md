@@ -33,18 +33,19 @@ Before you begin, ensure that you have met the following requirements:
 ```bash
 npm install
 npx playwright install
+npm install date-fns --save-dev 
 ```
 
 ## Running Tests
 - Specific Test Suite:
 
 ```bash
-npx playwright test automation/web/web_testsuites/login.spec.js
+npx playwright test automation/web/web_testsuites/login.spec.js --reporter=html
 ```
 
 - To run all tests, execute the following command:
 ```bash
-npx playwright test
+npx playwright test --reporter=html
 ```
 
 - Run tests in parallel (e.g., with 4 workers):

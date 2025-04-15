@@ -1,0 +1,11 @@
+{
+  "firstname": "Nicholaus",
+  "lastname": "Schinner",
+  "totalprice": 836,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-05-02",
+    "checkout": "2025-05-03"
+  },
+  "additionalneeds": "Parking"
+}

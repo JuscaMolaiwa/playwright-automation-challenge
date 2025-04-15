@@ -1,0 +1,11 @@
+{
+  "firstname": "UpdatedName",
+  "lastname": "Jones",
+  "totalprice": 999,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-05-13",
+    "checkout": "2025-05-08"
+  },
+  "additionalneeds": "Airport Shuttle"
+}

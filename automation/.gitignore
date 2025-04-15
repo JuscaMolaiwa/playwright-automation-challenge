@@ -1,3 +1,5 @@
-/web-screenshots/
-web-screenshots
+
+
+# Dependency directories
+node_modules/
 automation/api/node_modules/

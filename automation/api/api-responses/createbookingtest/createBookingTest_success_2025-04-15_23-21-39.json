@@ -1,0 +1,14 @@
+{
+  "bookingid": 185,
+  "booking": {
+    "firstname": "Rodger",
+    "lastname": "Kuhn",
+    "totalprice": 819,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2025-05-09",
+      "checkout": "2025-05-02"
+    },
+    "additionalneeds": "Airport Shuttle"
+  }
+}

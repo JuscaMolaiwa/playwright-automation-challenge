@@ -1,0 +1,11 @@
+{
+  "firstname": "UpdatedName",
+  "lastname": "Schmeler",
+  "totalprice": 999,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-05-18",
+    "checkout": "2025-05-21"
+  },
+  "additionalneeds": "Parking"
+}
