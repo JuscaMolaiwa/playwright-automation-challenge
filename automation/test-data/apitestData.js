@@ -1,10 +1,10 @@
-const { faker } = require('@faker-js/faker');  
+const { faker } = require('@faker-js/faker');
 
 module.exports = {
   generateBookingData: () => ({
-    firstname: faker.name.firstName(),
-    lastname: faker.name.lastName(),
-    totalprice: faker.datatype.number({ min: 50, max: 1000 }),
+    firstname: faker.person.firstName(),
+    lastname: faker.person.lastName(),         
+    totalprice: faker.number.int({ min: 50, max: 1000 }), 
     depositpaid: faker.datatype.boolean(),
     bookingdates: {
       checkin: faker.date.future({ years: 0.1 }).toISOString().split('T')[0],

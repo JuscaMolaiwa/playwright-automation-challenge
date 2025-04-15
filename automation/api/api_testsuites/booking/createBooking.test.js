@@ -1,12 +1,15 @@
 const { test, expect } = require('@playwright/test');
 const APIHelper = require('../../api-utilities/apiHelper');
 const { generateBookingData, defaultBookingPayload } = require('../../../test-data/apitestData');
+const playwrightConfig = require('../../playwright.api.config');
 
 test.describe('Create Booking Tests', () => {
   let apiHelper;
+  let baseURL;
 
   test.beforeEach(async ({ request }) => {
-    apiHelper = new APIHelper(request);
+    baseURL = playwrightConfig.use.baseURL;
+    apiHelper = new APIHelper(request, baseURL); // Pass baseURL here
   });
 
   test('should create a new booking with valid data', async () => {
@@ -22,9 +25,9 @@ test.describe('Create Booking Tests', () => {
     expect(response.booking).toMatchObject(defaultBookingPayload);
   });
 
-  test('should fail with missing required fields', async ({ request }) => {
+  test('should fail with missing required fields', async () => {
     const invalidData = { ...generateBookingData(), firstname: undefined };
-    const response = await request.post('/booking', {
+    const response = await apiHelper.request.post(`${baseURL}/booking`, {
       data: invalidData
     });
     expect(response.ok()).toBeFalsy();

@@ -23,7 +23,7 @@ class APIHelper {
   }
 
   async createBooking(bookingData) {
-    const response = await this.request.post('/booking', {
+    const response = await this.request.post(`${this.baseURL}/booking`,{
       data: bookingData
     });
     expect(response.ok()).toBeTruthy();
