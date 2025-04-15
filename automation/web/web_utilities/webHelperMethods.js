@@ -1,4 +1,7 @@
+const playwrightConfig = require('../playwright.config.js');
+
 class WebHelperMethods {
+
     /**
      * Reusable method to fetch the environment value
      * Checks system properties, environment variables, and Playwright config
@@ -11,29 +14,13 @@ class WebHelperMethods {
         // If not found, try Playwright config
         if (!environment) {
             try {
-                const playwrightConfig = require('../playwright.config.js');
-                environment = playwrightConfig.environmentConfig.env;
+                environment = playwrightConfig.use.env;
             } catch (e) {
                 console.warn('Playwright config not available for environment lookup');
             }
         }
 
         return environment || 'LOCAL_ENVIRONMENT'; // Default to LOCAL_ENVIRONMENT
-    }
-
-    /**
-     * Gets environment-specific configuration
-     * @returns {Object} Environment config object
-     */
-    static getEnvironmentConfig() {
-        try {
-            const playwrightConfig = require('../playwright.config.js');
-            const env = this.getEnvironment();
-            return playwrightConfig.environmentConfig.environments[env] || {};
-        } catch (e) {
-            console.warn('Failed to get environment config:', e.message);
-            return {};
-        }
     }
 }
 

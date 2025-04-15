@@ -1,6 +1,7 @@
 const { chromium, firefox, webkit } = require('playwright');
 const { TestLogger } = require('../../shared-utils/testLogger.js');
 const { WebHelperMethods } = require('../../web/web_utilities/webHelperMethods.js');
+const playwrightConfig = require('../playwright.config.js');
 
 class BrowserOptions {
     static BROWSERS = {
@@ -18,7 +19,7 @@ class BrowserOptions {
      */
     static getBrowserChoice() {
         // Try environment variable first
-        let browser = process.env.BROWSER?.toLowerCase();
+        let browser = playwrightConfig.use.browserName;
         
         // Validate browser choice
         if (browser && Object.values(this.BROWSERS).includes(browser)) {
@@ -45,7 +46,7 @@ class BrowserOptions {
             const browser = await browserType.launch(launchOptions);
             await TestLogger.logTestResult(
                 'INFO',
-                `Browser launched: ${browserChoice} v${browser.version()}`
+                `Browser launched successfully: ${browserChoice} v${browser.version()}`
             );
             return browser;
             

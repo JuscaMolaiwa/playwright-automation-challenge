@@ -9,7 +9,7 @@ module.exports = {
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     baseURL: 'https://www.saucedemo.com',
-    browserName: 'Chrome',
-    env: 'LOCAL_ENVIRONMENT'
+    browserName: 'chrome',
+    env: 'local'
   },
 };
